@@ -1,6 +1,6 @@
-MVP for Lexical Diversity App using electron
+# MVP for Lexical Diversity App using electron
 
-## To Use
+## Reminder for me. 
 
 To clone and run this repository you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer. From your command line:
 
@@ -13,6 +13,9 @@ npm install electron-packager -g
 cd electron-quick-start
 # Install dependencies
 npm install
+
+*dont run anything above this*
+
 # Run the app
 npm start
 # Build the Executable/App
