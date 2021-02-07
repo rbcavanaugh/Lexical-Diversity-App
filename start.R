@@ -28,7 +28,7 @@ file.copy(from=list.files('.', "*.R"), to="./electron-quick-start",
           overwrite=TRUE, recursive=TRUE, copy.mode=TRUE)
 
 #Run R Portable for platform you are on.  Install packages needed for Shiny app
-setwd("./electorn-quick-start/R-Portable-Mac")
+setwd("./electorn-quick-start/Resources")
 system("R")
 #npm install
 

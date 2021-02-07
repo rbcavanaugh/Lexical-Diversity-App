@@ -25,7 +25,7 @@ if(process.platform == WINDOWS){
 } else if(process.platform == MACOS){
   //killStr = 'pkill -9 "R"'
   //execPath = "export PATH=\""+path.join(app.getAppPath(), "R-Portable-Win")+":$PATH\"
-  var macAbsolutePath = path.join(app.getAppPath(), "R-Portable-Mac")
+  var macAbsolutePath = path.join(app.getAppPath(), "Resources")
   var env_path = macAbsolutePath+((process.env.PATH)?":"+process.env.PATH:"");
   var env_libs_site = macAbsolutePath+"/library"+((process.env.R_LIBS_SITE)?":"+process.env.R_LIBS_SITE:"");
   process.env.PATH = env_path
@@ -33,7 +33,7 @@ if(process.platform == WINDOWS){
   process.env.NODE_R_HOME = macAbsolutePath
   
   //process.env.R_HOME = macAbsolutePath
-  execPath = path.join(app.getAppPath(), "R-Portable-Mac", "bin", "R" )
+  execPath = path.join(app.getAppPath(), "Resources", "bin", "R" )
 } else {
   console.log("not on windows or macos?")
   throw new Error("not on windows or macos?")
@@ -69,7 +69,7 @@ function createWindow () {
 
     loading.once('show', () => {
       console.log(new Date().toISOString()+'::show loading')
-      mainWindow = new BrowserWindow({webPreferences:{nodeIntegration:false}, show:false, width: 800, height: 600, title:""})
+      mainWindow = new BrowserWindow({webPreferences:{nodeIntegration:false}, show:false, width: 1000, height: 800, title:""})
       /*
         mainWindow = new BrowserWindow({
           width: 800,

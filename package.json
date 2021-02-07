@@ -1,7 +1,7 @@
 {
-  "name": "electron-quick-start",
+  "name": "Lexical Diversity App",
   "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "description": "MVP electron shiny app",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
@@ -17,8 +17,8 @@
     "tutorial",
     "demo"
   ],
-  "author": "GitHub",
-  "license": "CC0-1.0",
+  "author": "Rob Cavanaugh",
+  "license": "CC BY",
   "devDependencies": {
     "electron": "^5.0.7"
   }

@@ -1,50 +1,72 @@
-#
-# This is a Shiny web application. You can run the application by clicking
-# the 'Run App' button above.
-#
-# Find out more about building applications with Shiny here:
-#
-#    http://shiny.rstudio.com/
-#
+### Cunningham & HAley (2020)
 
 library(shiny)
+library(tibble)
+library(qdap) 
+library(koRpus)
+
+set.kRp.env(lang="en")
+koRpus.lang.en::lang.support.en()
+txt <- as.character('Cunningham (2020): "We extracted an orthographic transcript that included no chat codes. We excluded unintelligible words, but all other verbal productions were included, such as whole-wordrepetitions, filler words, and so forth."')
 
 # Define UI for application that draws a histogram
 ui <- fluidPage(
    
    # Application title
-   titlePanel("Old Faithful Geyser Data"),
+   titlePanel("Word Information Measure and Moving Average Type Token Ratio"),
    
    # Sidebar with a slider input for number of bins 
    sidebarLayout(
       sidebarPanel(
-         sliderInput("bins",
-                     "Number of bins:",
-                     min = 1,
-                     max = 50,
-                     value = 30)
+         textAreaInput("transcr",
+                       "Paste Transcription Here:",
+                       value = "Young boy is practicing playing soccer. Kicking the ball up and keeping it in the air. He miskicks. and and it fall goes and breaks the window of his house. of the living room actually. nd bounces into the living room knocking a lamp over where his father is sitting. the father picks up the soccer ball. Looks out the window. And calls for the little boy &t to come and explain. [AphasiaBank]",
+                       width = '100%',
+                       height = '400px'),
+         sliderInput("mattr_w", "MATTR WINDOW:", value = 5, min = 5, max = 50),
       ),
       
       # Show a plot of the generated distribution
       mainPanel(
-         plotOutput("distPlot")
-      )
+         tableOutput("summaryStats"),
+         textOutput("description")
+      ) 
    )
 )
 
 # Define server logic required to draw a histogram
 server <- function(input, output) {
    
-   output$distPlot <- renderPlot({
-      # generate bins based on input$bins from ui.R
-      x    <- faithful[, 2] 
-      bins <- seq(min(x), max(x), length.out = input$bins + 1)
+   
+   output$description <- renderText({txt})
+   
+   output$summaryStats <- renderTable({
       
-      # draw the histogram with the specified number of bins
-      hist(x, breaks = bins, col = 'darkgray', border = 'white')
+      # save input as a variable
+      transcript <- as.character(input$transcr)
+      # WIM
+      ld <- diversity(transcript)$shannon
+      #MATTR
+      tokenized.obj <- tokenize(transcript, lang = "en", format = 'obj') #using the tokenize function in koRpus
+      m <- MATTR(tokenized.obj, window = input$mattr_w) #this is the analysis window, currently set to 5 words
+      m <- m@MATTR
+      m <-m$MATTR
+      
+      df <- tibble(
+         MATTR = m,
+         Word_Information_Measure = ld
+      )
+      
+      return(df)
    })
 }
 
 # Run the application 
 shinyApp(ui = ui, server = server)
+
+
+# deployment: 
+
+# library(rsconnect)
+# rsconnect::deployApp("/Users/robcavanaugh/Dropbox/discourse_analysis")
 
