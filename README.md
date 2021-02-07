@@ -2,6 +2,8 @@
 
 ## MVP for Lexical Diversity App using electron
 
+Note, for size reasons, folders for R portable 4.0.3 and nodejs stuff are under gitignore. the app itself is similarly ignored. 
+
 ## Reminder for me. 
 
 To clone and run this repository you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer. From your command line:
